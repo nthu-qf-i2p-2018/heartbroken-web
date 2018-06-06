@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from agent import Agent
-from card import ALL_CARDS
+from game import Game
 
 
 class MyAgent(Agent):
@@ -12,7 +12,8 @@ class MyAgent(Agent):
     info: score information and cards played in previous rounds
     '''
     def play(self, cards_you_have, cards_played, heart_broken, info):
-        return ...
+        cards = Game.get_legal_moves(cards_you_have, cards_played, heart_broken)
+        return cards[0]
 
     '''
     decide cards you want to pass to the player next to you
@@ -21,4 +22,4 @@ class MyAgent(Agent):
     cards: list of cards in your hand
     '''
     def pass_cards(self, cards):
-        return ...
+        return cards[:3]

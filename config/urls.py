@@ -16,11 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from index.views import index
+from index.views import index, play_post, get_play_post
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('pattern', get_pattern_post),
+    path('play', play_post),
+    path('getplay', get_play_post),
     path('', index),
 ]

@@ -52,6 +52,13 @@ class Card:
         else:
             return _suit[self.suit] > _suit[other.suit]
 
+    def to_json(self):
+        return {'suit': self.suit, 'number': self.number}
+
+    @classmethod
+    def from_json(cls, json_obj):
+        return cls(json_obj['suit'], json_obj['number'])
+
 
 _number = {
     1: 100, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9,
