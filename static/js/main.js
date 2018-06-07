@@ -13,6 +13,8 @@ function startGame() {
         dataType: 'json',
         success: function(data) {
             PlayerBtn.off();
+            // reset desk
+            $(".player .card").attr("class", "card empty");
             doJob(data);
         }, 
         error: function(XMLHttpRequest, textStatus, errorThrown) { 
@@ -25,7 +27,7 @@ function startGame() {
 function doJob(data) {
     if(data.instruction == 'pass card') {
         renderCards(data.cards_you_have);
-        PlayerBtn.text('換牌').click(function() {
+        PlayerBtn.text('換牌').prop('disabled', true).click(function() {
             if(!$(this).prop('disabled')) {
                 var cards = $(this).parent().find('.card.selected').map(function() {
                     var card = $(this).attr("alt");
@@ -34,7 +36,7 @@ function doJob(data) {
                 passCards(cards);   
             }
         });
-        PlayerBtn.prop('disabled', true);
+        // set click function for card click
         $("#player .card").click(function() {
             $(this).toggleClass('selected');
             var okToPass = $(this).parent().find('.card.selected').length == 3;
@@ -42,26 +44,36 @@ function doJob(data) {
         });
     } else if (data.instruction == "play card") {
         PlayerBtn.hide();
-
         renderCards(data.cards_you_have);
+
+        // TODO: display the result of last round
+        if(data.history.length > 0 && data.msg != 'Illegal move!') {
+            last_round = data.history.slice(-1);
+            // TODO: show all cards played last round
+            // TODO: show the winner last round (move cards to the position)
+        }
+
+        // reset desk
         $(".player .card").attr("class", "card empty");
-        data.cards_played.reverse();
+
+        // TODO: display card is played 1-by-1 (animation)
         data.cards_played.forEach(function(card, index, array) {
-            var n = 3 - index;
+            var n = array.length - index;
             var suitName = SuitName[card.suit];
             $(`.player-${n} .card`).removeClass('empty').addClass(suitName).addClass(`rank${card.number}`);
         });
+        // set click function for card click
         $("#player .card").click(function() {
             var card = $(this).attr("alt");
-            $(this).remove()
             playCard(card);
+            $(this).remove();
         });
     } else if (data.instruction == 'end') {
         renderCards([]);
         alert(data.scores);
         PlayerBtn.text('重新開始').click(startGame).fadeIn();
         PlayerBtn.prop('disabled', false);
-    } 
+    }
 }
 
 function renderCards(cards) {
@@ -107,7 +119,7 @@ function playCard(card) {
         url: "play",
         data: data,
         dataType: 'json',
-        success: doJob, 
+        success: doJob,
         error: function(XMLHttpRequest, textStatus, errorThrown) { 
             console.log("Status: " + textStatus); 
             console.log("Error: " + errorThrown); 
@@ -115,24 +127,6 @@ function playCard(card) {
     });
 }
 
-function setGame(data) {
-    var htmlFrag = '';
-    data.patterns.forEach(function(pattern) {
-        htmlFrag += '<p class="pattern">' + pattern.text + ' <font size="3" color="green">' + pattern.count + '</font></p>';
-        htmlFrag += '<p class="example">';
-        pattern.colls.forEach(function(ngram) {
-            htmlFrag += '<p class="example">';
-            ngram.examples.slice(0, 1).forEach(function(example) {
-                var content = example.text.replace(/\[/g, '<font class="main">').replace(/\]/g, '</font>');
-                htmlFrag += '<font class="prev">' + content + '</font>';
-                htmlFrag += '<font class="count">' + example.count + '</font>';
-            });
-            htmlFrag += '</p>';
-        });
-        htmlFrag += '</p>';
-    });
-    $('.pattern-area').html(htmlFrag);
-}
-
+// TODO: show message tooltip
 function showMsg(msg) {
 }
