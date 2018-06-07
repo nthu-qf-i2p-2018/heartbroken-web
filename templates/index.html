@@ -13,21 +13,21 @@
 
         <div class="desk">
             <div class="empty"></div>
-            <div class="top">
+            <div class="top player player-2">
                 <div class="card empty"><div class="face"></div></div>
             </div>
             <div class="empty"></div>
 
-            <div class="left">
+            <div class="left player player-1">
                 <div class="card empty"><div class="face"></div></div>
             </div>
             <div class="empty"></div>
-            <div class="right">
+            <div class="right player player-3">
                 <div class="card empty"><div class="face"></div></div>
             </div>
 
             <div class="empty"></div>
-            <div class="bottom">
+            <div class="bottom player player-0">
                 <div class="card empty"><div class="face"></div></div>
             </div>
             <div class="empty"></div>
@@ -35,19 +35,13 @@
     </div>
 
     <div id="player">
-        <div class="card spades rank1"><div class="face"></div></div>
-        <div class="card spades rank2"><div class="face"></div></div>
-        <div class="card spades rank3"><div class="face"></div></div>
-        <div class="card spades rank4"><div class="face"></div></div>
-        <div class="card spades rank5"><div class="face"></div></div>
-        <div class="card spades rank6"><div class="face"></div></div>
-        <div class="card spades rank7"><div class="face"></div></div>
-        <div class="card spades rank8"><div class="face"></div></div>
-        <div class="card spades rank9"><div class="face"></div></div>
-        <div class="card spades rank10"><div class="face"></div></div>
-        <div class="card spades rank11"><div class="face"></div></div>
-        <div class="card spades rank12"><div class="face"></div></div>
-        <div class="card spades rank13"><div class="face"></div></div>
+        <button class="btn btn-dark"></button>
+        <div class="cards"></div>
     </div>
+
+    <!-- Scripts -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
   </body>
 </html>
