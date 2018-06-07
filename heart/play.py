@@ -14,5 +14,5 @@ if __name__ == '__main__':
 
     game.set_game()
     scores = game.play()
-    wa.close(scores)
+    wa.close(game.game_info)
     print(scores)

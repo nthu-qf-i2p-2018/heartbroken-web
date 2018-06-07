@@ -115,7 +115,7 @@ class Game:
 
         # check if legal
         for i, cards in enumerate(cards_to_pass):
-            if not set(cards).issubset(self.hands[i]):
+            if not cards.issubset(self.hands[i]):
                 cards_not_in = set(cards) - self.hands[i]
                 raise NotHaveCardException(self.agents[i], cards_not_in)
             if len(cards) != 3:

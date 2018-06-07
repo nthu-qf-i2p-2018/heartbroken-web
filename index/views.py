@@ -38,7 +38,7 @@ def play_post(request):
         instruction = inst_listen_dict[request.session['user-id']].get()
         if instruction['instruction'] == 'end':
             del inst_listen_dict[request.session['user-id']]
-        return JsonResponse(instruction)
+        return JsonResponse(instruction, status=instruction.get('status', 200))
 
 
 @method_decorator(csrf_exempt, name='dispatch')

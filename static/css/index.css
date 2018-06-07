@@ -77,12 +77,12 @@ body {
 .desk {
   width: 15rem;
   height: 21rem;
-  margin-top: 3rem;
+  margin-top: 1rem;
   display: grid;
   grid-template-columns: auto auto auto;
 }
 
-#player {
+#user {
   position: fixed;
   bottom: 10px;
   width: 100%;
@@ -106,7 +106,6 @@ body {
   border-radius: 4px;
   -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.15);
   box-shadow: 0 1px 1px rgba(0,0,0,0.15);
-  cursor: pointer;
   will-change: transform;
   border: 1px solid silver;
 }
@@ -114,14 +113,42 @@ body {
   background-color: transparent;
   border-color: goldenrod;
 }
-#player .card:not(:first-child) {
+#user .card {
+  cursor: pointer;
+}
+#user .card:not(:first-child) {
   margin-left: -3rem;
 }
-#player .card:hover {
+#user .card:hover {
   margin-bottom: .6rem;
 }
-#player .card.selected {
+#user .card.selected {
   margin-bottom: 1rem;
+}
+.player {
+  position: relative;
+  display: inline-block;
+}
+
+.player .score {
+  width: 4.58rem;
+  font-size: .6rem;
+  background-color: black;
+  color: #fff;
+  text-align: right;
+  padding: 0 5px;
+}
+
+.top.player .score {
+  /* margin-bottom: 6px; */
+}
+
+.player .score::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin-top: -5px;
 }
 .card:before,
 .card:after {
